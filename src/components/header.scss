@@ -1,0 +1,28 @@
+.nav{
+    width: 90vw;
+    height: 5vh;
+    background-color: rgb(58, 58, 58);
+    margin-top: 10vh;
+    
+}
+ul{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;  
+}
+
+li{
+    border-left: 1px solid white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 5vh;
+    justify-content: center;
+    width: 100%;
+    color: aliceblue;
+    list-style: none;
+    background-color: rgb(58, 58, 58);
+    &:hover{
+        background-color: rgb(57, 100, 100);
+    }
+}

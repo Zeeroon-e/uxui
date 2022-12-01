@@ -1,5 +1,18 @@
-.app{
+*{
   margin: 0px;
   padding: 0%;
   box-sizing: border-box;
+}
+
+.app-nav{
+  display: flex;
+  justify-content: center;
+}
+
+.app-display{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
 }

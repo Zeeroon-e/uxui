@@ -1,13 +1,20 @@
 import { useState } from 'react'
 import './App.css'
 import Header from './components/Header'
+import ByCategory from './components/ByCategory'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="app">
-      <Header />
+      <section className='app-nav'>
+        <Header />
+      </section>
+      
+      <section className='app-display'>
+        <ByCategory />
+      </section>
+      
     </div>
   )
 }
