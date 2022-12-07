@@ -57,7 +57,6 @@ const filteredGenderData: any = genderData.map((label: string) => {
     return label
 })
 
-console.log(filteredGenderData)
 
 let genderLabels: string[] = [], genderCount: any = {}
 
@@ -102,4 +101,39 @@ const genderDiagramData = {
     }
 }
 
-export { categoryDiagramData, genderDiagramData }
+
+
+// Country
+
+const birthData: any = laure.map(object => object.birth)
+
+let countryLabels: string[] = [], countryCount: any = {}
+
+birthData.forEach(item => {
+    console.log(item.place.country.en)
+       countryLabels.push(item.place.country.en)
+    
+    
+    // countries.push(item.place.country)
+})
+
+// let countryLabels: string[] = [], countryCount: any = {}
+
+// for (let i = 0; i < birthData.length; i++) {
+    
+//     if ( !countryLabels.includes(birthData[i])) {
+//         countryLabels.push(birthData[i])   
+//     }
+
+//     if (countryCount[birthData[i]] === undefined) {
+//         countryCount[birthData[i]] = 1
+//     } else {
+//        countryCount[birthData[i]]++ 
+//     }
+// }
+
+console.log('allCountries: ',countryLabels)
+
+
+
+export { categoryDiagramData, genderDiagramData, }

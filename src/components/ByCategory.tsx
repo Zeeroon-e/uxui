@@ -5,9 +5,6 @@ import './bycategory.scss'
 
 function ByCategory() {
 
-  console.log(categoryDiagramData);
-  
-  
   return (
     <div className='demo-chart'>
         <Pie data={categoryDiagramData} className='pie-chart'/>
