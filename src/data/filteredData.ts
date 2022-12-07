@@ -50,7 +50,7 @@ const categoryDiagramData = {
 
 const genderData: any = laure.map(object => object.gender)
 
-const filteredGenderData: string = genderData.map(label => {
+const filteredGenderData: any = genderData.map((label: string) => {
     if(label === undefined){
         return 'Orgs'
     }
