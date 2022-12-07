@@ -1,11 +1,13 @@
 import Chart from 'chart.js/auto'
 import { Pie } from 'react-chartjs-2'
-import { categoryDiagramData } from '../data/filteredData'
+import { genderDiagramData } from '../data/filteredData'
 
 function ByGender() {
+    console.log('gender: ', genderDiagramData);
+    
   return (
     <div className='demo-chart'>
-        <Pie data={categoryDiagramData} className='pie-chart'/>
+        <Pie data={genderDiagramData} className='pie-chart'/>
     </div>
   )
 }
