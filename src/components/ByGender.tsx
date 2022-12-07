@@ -1,13 +1,8 @@
 import Chart from 'chart.js/auto'
 import { Pie } from 'react-chartjs-2'
 import { categoryDiagramData } from '../data/filteredData'
-import './bycategory.scss'
 
-function ByCategory() {
-
-  console.log(categoryDiagramData);
-  
-  
+function ByGender() {
   return (
     <div className='demo-chart'>
         <Pie data={categoryDiagramData} className='pie-chart'/>
@@ -15,4 +10,4 @@ function ByCategory() {
   )
 }
 
-export default ByCategory
+export default ByGender

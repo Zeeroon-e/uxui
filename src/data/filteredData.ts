@@ -1,4 +1,5 @@
-import data from '../data/json_award.json'
+import data from './json_award.json'
+import laure from './json_laureates.json'
 
 const categoryData = data.map(object => object.category.en)
 
@@ -43,6 +44,10 @@ const categoryDiagramData = {
         
     }
 }
+
+// Gender
+
+const genderData = laure.map(object => object.gender)
 
 
 export { categoryDiagramData }
