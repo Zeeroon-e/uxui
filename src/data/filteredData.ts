@@ -48,30 +48,38 @@ const categoryDiagramData = {
 // Gender
 
 
-const genderData = laure.map(object => object.gender)
+const genderData: any = laure.map(object => object.gender)
+
+const filteredGenderData: string = genderData.map(label => {
+    if(label === undefined){
+        return 'Orgs'
+    }
+    return label
+})
+
+console.log(filteredGenderData)
 
 let genderLabels: string[] = [], genderCount: any = {}
 
-for (let i = 0; i < genderData.length; i++) {
+for (let i = 0; i < filteredGenderData.length; i++) {
     
-    if ( !genderLabels.includes(genderData[i])) {
-        genderLabels.push(genderData[i])   
+    if ( !genderLabels.includes(filteredGenderData[i])) {
+        genderLabels.push(filteredGenderData[i])   
     }
 
-    if (genderCount[genderData[i]] === undefined) {
-        genderCount[genderData[i]] = 1
+    if (genderCount[filteredGenderData[i]] === undefined) {
+        genderCount[filteredGenderData[i]] = 1
     } else {
-       genderCount[genderData[i]]++ 
+       genderCount[filteredGenderData[i]]++ 
     }
 }
 
 
+
+
 let genderDataset: number[] = []
 genderLabels.forEach(label => {
-    if(label == undefined){
-        label = 'Orgs'
-    }
-    console.log(label)
+    
     genderDataset.push(genderCount[label])
 })
 
