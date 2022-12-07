@@ -110,13 +110,46 @@ const birthData: any = laure.map(object => object.birth)
 let countryLabels: string[] = [], countryCount: any = {}
 
 birthData.forEach(item => {
-    console.log(item.place.country.en)
-       countryLabels.push(item.place.country.en)
-    
-    
-    // countries.push(item.place.country)
+
+    if(item){
+        
+        if(item.place.country.en == item.place.country.en){
+            countryLabels.push(item.place.country.en)
+        }
+
+        if (countryCount[item.place.country.en] === undefined) {
+            countryCount[item.place.country.en] = 1
+        }
+        else if(item.place.country.en == item.place.country.en){
+            countryCount[item.place.country.en]++
+        }
+    }
 })
 
+let countryDataset: number[] = []
+countryLabels.forEach(label => {
+    
+    countryDataset.push(countryCount[label])
+})
+
+const countryDiagramData = {
+    datasets: [
+        {
+            data: countryDataset,
+            label: 'Count',
+            backgroundColor: [
+                '#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'
+            ],
+            hoverOffset: 10, 
+        }
+    ],
+    labels: countryLabels,
+    options: {
+        responsive:true,
+        maintainAspectRatio: false
+        
+    }
+}
 // let countryLabels: string[] = [], countryCount: any = {}
 
 // for (let i = 0; i < birthData.length; i++) {
@@ -132,8 +165,8 @@ birthData.forEach(item => {
 //     }
 // }
 
-console.log('allCountries: ',countryLabels)
+console.log('allCountries: ', countryDataset)
 
 
 
-export { categoryDiagramData, genderDiagramData, }
+export { categoryDiagramData, genderDiagramData, countryDiagramData }
