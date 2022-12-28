@@ -12,20 +12,21 @@ import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const location = useLocation();
+  const [animationName, setAnimationName] =useState('bouncein');
 
   return (
     <div className="app">
       <section className='app-nav'>
-        <Header />
+        <Header setAnimationName={setAnimationName} animationName={animationName}/>
       </section>
       
       <section className='app-display'>
         <AnimatePresence mode='wait'>
         <Routes key={location.pathname} location={location}>
-          <Route element={ < Category /> } path='/' />
-          <Route element={ < Gender /> } path='/gender' />
-          <Route element={ < Country /> } path='/country' />
-          <Route element={ < Year /> } path='/year' />
+          <Route element={ < Category animationName={animationName} /> } path='/' />
+          <Route element={ < Gender animationName={animationName}/> } path='/gender' />
+          <Route element={ < Country animationName={animationName} /> } path='/country' />
+          <Route element={ < Year animationName={animationName} /> } path='/year' />
         </Routes>
         </AnimatePresence>
       </section>

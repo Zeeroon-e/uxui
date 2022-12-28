@@ -2,22 +2,23 @@ import React, { useState } from 'react'
 import './header.scss'
 import { useNavigate } from 'react-router'
 
-function Header() {
+function Header({animationName,setAnimationName}: any) {
   const navigate = useNavigate();
-  const [animation, setAnimation] = useState('');
 
+
+  
   const sneakupBtn = () => {
-    if (animation == 'bouncein') {
-      setAnimation('sneakup')
+    if (animationName == 'bouncein') {
+      setAnimationName('sneakup')
    }
-    console.log(animation);
+    console.log(animationName);
     
   }
   const bounceinBtn = () => {
-    if (animation == 'sneakup') {
-      setAnimation('bouncein')
+    if (animationName == 'sneakup') {
+      setAnimationName('bouncein')
    }
-    console.log(animation);
+    console.log(animationName);
     
   }
   return (

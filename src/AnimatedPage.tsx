@@ -26,7 +26,7 @@ const animations = {
         }
     }
 }
-let animationName = "sneakup";
+
 const AnimatedPage = ( {children, animationName}: any ) => {
   return (
     <motion.div variants={animations} 

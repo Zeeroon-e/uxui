@@ -1,9 +1,9 @@
 import React from 'react'
 import AnimatedPage from '../AnimatedPage'
 import ByGender from '../components/ByGender'
-function Gender() {
+function Gender({animationName}:any) {
   return (
-    <AnimatedPage>
+    <AnimatedPage animationName={animationName}>
     <div>
       <ByGender />
     </div>
