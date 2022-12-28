@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import './App.css'
@@ -12,7 +12,7 @@ import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const location = useLocation();
-  const [animationName, setAnimationName] =useState('bouncein');
+  const [animationName, setAnimationName] =useState('');
 
   return (
     <div className="app">

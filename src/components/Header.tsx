@@ -1,26 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import './header.scss'
 import { useNavigate } from 'react-router'
 
 function Header({animationName,setAnimationName}: any) {
   const navigate = useNavigate();
-
+  const btnClicked = (e: any) => {
+    if (animationName !== e) {
+      setAnimationName(e)
+    }
+  }
 
   
-  const sneakupBtn = () => {
-    if (animationName == 'bouncein') {
-      setAnimationName('sneakup')
-   }
-    console.log(animationName);
-    
-  }
-  const bounceinBtn = () => {
-    if (animationName == 'sneakup') {
-      setAnimationName('bouncein')
-   }
-    console.log(animationName);
-    
-  }
   return (
     <div className='nav'>
       <ul>
@@ -30,8 +20,9 @@ function Header({animationName,setAnimationName}: any) {
         <li onClick={() => navigate('/year')}>Price by year</li>
       </ul>
       <section className='btn-section'>
-        <button onClick={sneakupBtn}>SneakUp</button>
-        <button onClick={bounceinBtn}>BounceIn</button>
+        <h6> animation styles:</h6>
+        <button onClick={(e) => btnClicked('sneakup')}>SneakUp</button>
+        <button onClick={(e) => btnClicked('bouncein')}>BounceIn</button>
       </section>
     </div>
   )
