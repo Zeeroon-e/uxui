@@ -4,9 +4,16 @@ import { countryDiagramData} from '../data/filteredData'
 
 function ByCountry() {
   return (
-    <div>
-      <Bar data={countryDiagramData} />
-    </div>
+    <>
+      <section className='view-header'>
+        <h1>Winners by Country</h1>
+      </section>
+      
+      <div className='demo-chart'>
+        <Bar data={countryDiagramData} />
+      </div>
+      
+    </>
   )
 }
 

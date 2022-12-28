@@ -5,9 +5,14 @@ import { genderDiagramData } from '../data/filteredData'
 function ByGender() {
     
   return (
-    <div className='demo-chart'>
+    <>
+      <section className='view-header'>
+        <h1>Winners by Gender</h1>
+      </section>
+      <div className='demo-chart'>
         <Pie data={genderDiagramData} className='pie-chart'/>
-    </div>
+      </div>
+    </>
   )
 }
 

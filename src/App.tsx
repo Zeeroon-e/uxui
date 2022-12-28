@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import './App.css'
 import Header from './components/Header'
@@ -8,8 +8,10 @@ import Category from './views/Category';
 import Gender from './views/Gender';
 import Country from './views/Country';
 import Year from './views/Year';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
+  const location = useLocation();
 
   return (
     <div className="app">
@@ -18,12 +20,14 @@ function App() {
       </section>
       
       <section className='app-display'>
-        <Routes>
+        <AnimatePresence mode='wait'>
+        <Routes key={location.pathname} location={location}>
           <Route element={ < Category /> } path='/' />
           <Route element={ < Gender /> } path='/gender' />
           <Route element={ < Country /> } path='/country' />
           <Route element={ < Year /> } path='/year' />
         </Routes>
+        </AnimatePresence>
       </section>
       
     </div>

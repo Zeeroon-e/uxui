@@ -1,48 +1,89 @@
-import data from './json_award.json'
+import award from './json_award.json'
 import laure from './json_laureates.json'
 
-const categoryData = data.map(object => object.category.en)
 
-let categoryLabels: string[] = [], categoryCount: any = {}
+const laureCategoryData: (string|undefined)[] = laure.map(laure => {
+	for(let price of laure.nobelPrizes) {
+		return price.category.en;
+	}
+});
 
-for (let i = 0; i < categoryData.length; i++) {
-    
-    if ( !categoryLabels.includes(categoryData[i])) {
-        categoryLabels.push(categoryData[i])
-    }
+const countryData: (string|undefined)[] = laure.map(laure => {
+	if(laure.founded) {
+		if(laure.founded.place.countryNow) {
+			return laure.founded.place.countryNow.en;
+		} else {
+			// console.log(laureate);
+			return "unkown";
+		}
+	} else if(laure.birth) {
+		if(laure.birth.place.countryNow) {
+			return laure.birth.place.countryNow.en;
+		}
+	} else {
+		// console.log(laureate);
+		return "unkown";
+	}
+});
+const awardYears: string[] = award.map(award => award.awardYear);
+const yearlyPriceMoney: number[] = award.map(award => award.prizeAmount);
 
-    if (categoryCount[categoryData[i]] === undefined) {
-        categoryCount[categoryData[i]] = 1
-    } else {
-       categoryCount[categoryData[i]]++ 
-    }
-    
+
+function setLablesAndCount(dataArray: any, labelArray: string[], countArray: any, undefinedLabel: string) {
+	for(let data of dataArray) {
+		if(data == undefined) {
+			if(!labelArray.includes(undefinedLabel)) {
+				labelArray.push(undefinedLabel);
+			}
+	
+			if (countArray[undefinedLabel] === undefined ) {
+				countArray[undefinedLabel] = 1;
+			} else {
+				countArray[undefinedLabel]++;  
+			}
+		} else {
+		
+			if(!labelArray.includes(data)) {
+				labelArray.push(data);
+			}
+			
+			if (countArray[data] === undefined ) {
+				countArray[data] = 1;
+			} else {
+				countArray[data]++;  
+			}
+		}
+	}
 }
 
-let categoryDataset: number[] = []
-categoryLabels.forEach(label => {
-    categoryDataset.push(categoryCount[label])
-})
-    
+//// category
+let lauretsCategoryLable: string[] = [];
+let lauretsCategoryCount: any = {};
+setLablesAndCount(laureCategoryData, lauretsCategoryLable, lauretsCategoryCount, "other category");
 
+
+let lauretsCategoryDataset: number[] = [];
+lauretsCategoryLable.forEach(label => {
+	lauretsCategoryDataset.push(lauretsCategoryCount[label])
+});
 
 const categoryDiagramData = {
-    datasets: [
-        {
-            data: categoryDataset,
-            label: 'Count',
-            backgroundColor: [
-                '#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'
-            ],
-            hoverOffset: 10, 
-        }
-    ],
-    labels: categoryLabels,
-    options: {
-        responsive:true,
-        maintainAspectRatio: false
+	labels: lauretsCategoryLable,
+	datasets: [
+		{
+			label: 'Antal',
+			data: lauretsCategoryDataset,
+			backgroundColor: ['#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'],
+			hoverOffset: 10,
+            borderColor: '#33333',
+		}
         
-    }
+	],
+    options: {
+            responsive:true,
+            maintainAspectRatio: false
+            
+        }
 }
 
 // Gender
@@ -90,7 +131,8 @@ const genderDiagramData = {
             backgroundColor: [
                 '#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'
             ],
-            hoverOffset: 10, 
+            hoverOffset: 10,
+            borderColor: '#33333', 
         }
     ],
     labels: genderLabels,
@@ -105,68 +147,56 @@ const genderDiagramData = {
 
 // Country
 
-const birthData: any = laure.map(object => object.birth)
+let countryLabels: string[] = [];
+let countryCount: any = {};
+setLablesAndCount(countryData, countryLabels, countryCount, "other countries");
 
-let countryLabels: string[] = [], countryCount: any = {}
 
-birthData.forEach(item => {
-
-    if(item){
-        
-        if(item.place.country.en == item.place.country.en){
-            countryLabels.push(item.place.country.en)
-        }
-
-        if (countryCount[item.place.country.en] === undefined) {
-            countryCount[item.place.country.en] = 1
-        }
-        else if(item.place.country.en == item.place.country.en){
-            countryCount[item.place.country.en]++
-        }
-    }
-})
-
-let countryDataset: number[] = []
+let processedCountryData: { country: string; count: any; }[] = [];
 countryLabels.forEach(label => {
-    
-    countryDataset.push(countryCount[label])
-})
+	processedCountryData.push({"country": label, "count": countryCount[label]});
+});
 
-const countryDiagramData = {
-    datasets: [
+processedCountryData.sort((a, b) => b.count - a.count);
+processedCountryData = processedCountryData.filter(item => item.count >= 3);
+
+let updatedCountryLables: string[] = [];
+let countryDataset: number[] = [];
+for(let data of processedCountryData) {
+	updatedCountryLables.push(data.country)
+	countryDataset.push(data.count);
+}
+
+ const countryDiagramData = {
+	labels: updatedCountryLables,
+	datasets: [
+		{
+			label: "Quantity",
+			data: countryDataset,
+			backgroundColor: ['#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'],
+			borderColor: '#3c2f2f'
+		}
+	],
+}
+
+/// average price money per year
+const AveragePrizeDiagramData =  {
+	labels: awardYears,
+	datasets: [
         {
-            data: countryDataset,
-            label: 'Count',
-            backgroundColor: [
-                '#00005C', '#3B185F', '#C060A1', '#F0CAA3', '#DC3535', '#FFE15D', '#FF8FB1'
-            ],
-            hoverOffset: 10, 
-        }
+        
+            label: 'Prize money',
+            data: yearlyPriceMoney,
+			backgroundColor: ['#C060A1'],
+	    }
     ],
-    labels: countryLabels,
     options: {
         responsive:true,
         maintainAspectRatio: false
         
     }
-}
-// let countryLabels: string[] = [], countryCount: any = {}
-
-// for (let i = 0; i < birthData.length; i++) {
-    
-//     if ( !countryLabels.includes(birthData[i])) {
-//         countryLabels.push(birthData[i])   
-//     }
-
-//     if (countryCount[birthData[i]] === undefined) {
-//         countryCount[birthData[i]] = 1
-//     } else {
-//        countryCount[birthData[i]]++ 
-//     }
-// }
-
-console.log('allCountries: ', countryDataset)
+};
 
 
 
-export { categoryDiagramData, genderDiagramData, countryDiagramData }
+export { categoryDiagramData, genderDiagramData, countryDiagramData, AveragePrizeDiagramData }
