@@ -13,16 +13,14 @@ const countryData: (string|undefined)[] = laure.map(laure => {
 		if(laure.founded.place.countryNow) {
 			return laure.founded.place.countryNow.en;
 		} else {
-			// console.log(laureate);
-			return "unkown";
+			return "not found";
 		}
 	} else if(laure.birth) {
 		if(laure.birth.place.countryNow) {
 			return laure.birth.place.countryNow.en;
 		}
 	} else {
-		// console.log(laureate);
-		return "unkown";
+		return "not found";
 	}
 });
 const awardYears: string[] = award.map(award => award.awardYear);
