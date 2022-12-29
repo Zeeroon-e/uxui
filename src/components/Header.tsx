@@ -23,6 +23,7 @@ function Header({animationName,setAnimationName}: any) {
         <h6> animation styles:</h6>
         <button onClick={(e) => btnClicked('sneakup')}>SneakUp</button>
         <button onClick={(e) => btnClicked('bouncein')}>BounceIn</button>
+        <button onClick={(e) => btnClicked('slidein')}>SlideIn</button>
       </section>
     </div>
   )

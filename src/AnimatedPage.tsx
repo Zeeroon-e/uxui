@@ -11,6 +11,12 @@ const animations = {
         
            
     },
+    slidein: {
+        x: [500, 0],
+        transition: {
+            duration: 1
+        }
+    },
     bouncein: {
         y: [-100, 0, -20, 0, -2, 0],
         transition: {
